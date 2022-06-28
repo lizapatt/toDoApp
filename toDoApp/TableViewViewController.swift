@@ -25,6 +25,7 @@ class TableViewViewController: UITableViewController {
         
         let dog = toDo()
         dog.name = "Walk the dog"
+        
         return [swift, dog]
     }
 
@@ -32,7 +33,7 @@ class TableViewViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -47,14 +48,19 @@ class TableViewViewController: UITableViewController {
         
         // Configure the cell...
         if toDo.important {
-            cell.textLabel?.text = "!" + toDo.name
+            cell.textLabel?.text = " ❗ " + toDo.name
         } else {
             cell.textLabel?.text = toDo.name
         }
+        
         return cell
     }
 
-
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let toDo = toDos[indexPath.row]
+        
+        performSegue(withIdentifier: "moveToComplete", sender: toDo)
+    }
 
 
     
@@ -62,6 +68,16 @@ class TableViewViewController: UITableViewController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let addVC = segue.destination as? addToDoViewController {
+            addVC.previousVC = self
+          }
+        
+        if let completeVC = segue.destination as? completeToDoViewController {
+            if let toDo = sender as? toDo {
+              completeVC.selectedToDo = toDo
+              completeVC.previousVC = self
+            }
+          }
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
     }

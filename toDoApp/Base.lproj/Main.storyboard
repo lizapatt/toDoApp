@@ -3,25 +3,56 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Add To Do View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="toDoApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                <viewController id="BYZ-38-t0r" customClass="addToDoViewController" customModule="toDoApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HmL-DD-73h">
+                                <rect key="frame" x="171" y="185" width="73" height="30"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Important: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RdH-1f-YIs">
+                                <rect key="frame" x="50" y="324" width="154" height="56"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="uyn-lc-Inx">
+                                <rect key="frame" x="228" y="418" width="51" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </switch>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <navigationItem key="navigationItem" id="QEl-Zp-fSd">
+                        <barButtonItem key="rightBarButtonItem" title=" " image="square.and.pencil" catalog="system" id="Sav-Vk-Jbe">
+                            <connections>
+                                <action selector="addTapped:" destination="BYZ-38-t0r" id="cho-k6-MuI"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="importantSwitch" destination="uyn-lc-Inx" id="M8d-pS-dga"/>
+                    </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="992.75362318840587" y="20.758928571428569"/>
+            <point key="canvasLocation" x="375" y="-107"/>
         </scene>
         <!--ToDo List-->
         <scene sceneID="gqw-Sb-D0O">
@@ -47,12 +78,65 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="ToDo List" id="itc-0Z-eT2">
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="plus" catalog="system" id="NG6-br-Ice"/>
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="NG6-br-Ice">
+                            <imageReference key="image" image="plus" catalog="system" symbolScale="large"/>
+                            <connections>
+                                <segue destination="BYZ-38-t0r" kind="show" id="wH1-sl-Bw7"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="AdO-Ft-8ZF" kind="show" identifier="moveToComplete" id="ZPx-KJ-zhl"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GUm-59-zn6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-349.27536231884062" y="-107.14285714285714"/>
+        </scene>
+        <!--Complete To Do View Controller-->
+        <scene sceneID="uf2-gx-JkB">
+            <objects>
+                <viewController id="AdO-Ft-8ZF" customClass="completeToDoViewController" customModule="toDoApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="n5t-i5-eS1">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="to do" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pJ1-KU-Yfi">
+                                <rect key="frame" x="83" y="221" width="127" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OAi-MI-E8m">
+                                <rect key="frame" x="232" y="216" width="87" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="87" id="6Q3-gA-Slh"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="gray" title="Complete"/>
+                                <connections>
+                                    <action selector="completeTapped:" destination="AdO-Ft-8ZF" eventType="touchUpInside" id="csU-Lw-rua"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="JtB-z9-KNF"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="OAi-MI-E8m" firstAttribute="leading" secondItem="pJ1-KU-Yfi" secondAttribute="trailing" constant="22" id="Uq6-Az-qco"/>
+                            <constraint firstItem="OAi-MI-E8m" firstAttribute="top" secondItem="JtB-z9-KNF" secondAttribute="top" constant="128" id="YCr-vB-Fqv"/>
+                            <constraint firstItem="pJ1-KU-Yfi" firstAttribute="leading" secondItem="JtB-z9-KNF" secondAttribute="leading" constant="83" id="nko-O7-t47"/>
+                            <constraint firstItem="pJ1-KU-Yfi" firstAttribute="centerY" secondItem="OAi-MI-E8m" secondAttribute="centerY" id="r8R-ZM-O3c"/>
+                            <constraint firstItem="JtB-z9-KNF" firstAttribute="trailing" secondItem="OAi-MI-E8m" secondAttribute="trailing" constant="95" id="vfC-3q-S9Z"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="zx1-tn-YQP"/>
+                    <connections>
+                        <outlet property="titleLabel" destination="pJ1-KU-Yfi" id="hpp-DC-O8p"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="e1g-P0-28i" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-349.27536231884062" y="617.41071428571422"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="qgk-VZ-Ngi">
@@ -75,6 +159,7 @@
     </scenes>
     <resources>
         <image name="plus" catalog="system" width="128" height="113"/>
+        <image name="square.and.pencil" catalog="system" width="128" height="115"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
